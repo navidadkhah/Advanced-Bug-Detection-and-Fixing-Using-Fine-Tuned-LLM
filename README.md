@@ -9,6 +9,7 @@ This repository hosts the project dedicated to evaluating the feasibility of det
 - [Fine-Tuning](#fine-tuning)
 - [Evaluation Metrics](#evaluation-metrics)
 - [Conclusion](#conclusion)
+- [User Interface](#user-interface)
 - [How to Use](#how-to-use)
 
 
@@ -22,7 +23,10 @@ The dataset, named `bug_evaluation_dataset`, is meticulously crafted to train an
 
 This dataset was generated using Mutation Testing techniques to systematically introduce bugs into existing clean code. The types of mutations are designed to simulate common logical and syntactic errors developers might encounter.
 
-**For a visual representation of the dataset structure and mutation types, see Figures 2 and 16.**
+<p align="center">
+    <img src="Images/Dataset_schema.jpg" width=600>
+    <img src="Images/mutation_distributaions.jpg" width=400>
+</p>
 
 ## Dataset Creation Process
 The dataset was curated through a semi-automated process:
@@ -32,8 +36,6 @@ The dataset was curated through a semi-automated process:
 
 ## Model Description
 The backbone of our fine-tuning experiments is the [Unsloth Meta-Llama 3.1-8B](https://github.com/unslothai/unsloth) model, renowned for its high performance in natural language understanding and generation tasks, including code generation and debugging. This model's capabilities make it ideally suited for addressing complex tasks involved in software debugging.
-
-**A detailed view of the model’s architecture can be seen in Figure 1.**
 
 ## Prompt Engineering
 Prompt engineering involves crafting and testing prompts that effectively guide LLMs to recognize and fix code errors. The process is detailed in the `Prompt_Engineering.ipynb` notebook, where different prompt formats and their impact on the LLM’s performance are explored. We introduced the `6` type of prompt that are used in the model. 
@@ -123,8 +125,10 @@ These prompts involve comparing the buggy code to a similar, but correct, code s
 ## Fine-Tuning
 In this project, fine-tuning is aimed at adapting the model to the coding domain, especially for bug detection and debugging. The model is trained on a dataset of code with errors and corresponding corrections, allowing it to learn patterns for identifying and fixing programming issues. The LoRA method is employed to efficiently adjust the model's weights, optimizing the fine-tuning process by reducing computational demand. This process enhances the model's ability to accurately detect and resolve bugs, ensuring it can provide effective code debugging suggestions while still generalizing well to other tasks. Fine-tuning, combined with LoRA, ensures that the model can handle the specific challenges of bug detection in programming with minimal resource requirements.
 
-**Fine-tuning processes and prompt engineering illustrations are shown in Figures 4, 9, 10, and 11.**
-
+<p align="center">
+    <img src="Images/LoRA.jpg" width=400>
+    <img src="Images/LoRA_training.jpg" width=600>
+</p>
 
 ## Evaluation Metrics
 To assess the effectiveness of the model post-training, several metrics are employed:
@@ -133,10 +137,22 @@ To assess the effectiveness of the model post-training, several metrics are empl
 - **ROUGE**: Evaluate the overlap of n-grams between the model’s output and the target code.
 - **SAS**: A syntax-aware semantic evaluation metric focusing on the logical correctness of the code.
 
-**Results of these metrics are illustrated in Figures 30, 31, 32, and 33.**
+<p align="center">
+    <img src="Images/EM_metric.jpg" width=300>
+    <img src="Images/CodeBELU_metric.jpg" width=300>
+    <img src="Images/SAS_metric.jpg" width=300>
+    <img src="Images/Rouge_metric.jpg" width=800>
+</p>
 
 ## Conclusion
-This project pushes the boundaries of what LLMs can achieve in software engineering contexts, providing tools and methodologies to enhance coding efficiency and accuracy through advanced AI techniques.
+As a result of the command line, the command line number two has the greatest impact on improving the results of the language model, and similarly, fine-tuning the model has yielded significant results in the responses of the Llama 3 model.
+
+## User Interface
+This user interface is designed for a `Bug Fixing Code Analyzer` tool. It allows users to input their code in the "Input Code" section, where they can analyze and identify bugs. After entering the code, users can click the "Analyze and Fix" button to initiate the process, and the tool will analyze the code and suggest potential fixes. The results are displayed in the "Output" section, providing the user with the model's output, which includes both the identified errors and improvements in the code. The design is clean and user-friendly, making it easy for users to input their code and receive feedback on the fly. The UI is intended to streamline the debugging process and make coding tasks more efficient.
+
+<p align="center">
+    <img src="Images/Interface.jpg" width=800>
+</p>
 
 ## How to Use
 To replicate the experiments or utilize the methodologies:
@@ -144,4 +160,8 @@ To replicate the experiments or utilize the methodologies:
 2. Ensure you have the required computing resources and dependencies installed.
 3. Follow the instructions in each notebook to train or evaluate the model.
 
-For further details, refer to each notebook's documentation within the repository.
+Additionally, you can access the fine-tuned model via Hugging Face:<br>
+[Fine-tuned Llama 3.1 8B - Bug Fixing](https://huggingface.co/navidadkhah/Fine-tuned-Llama-3.1-8B-bug-fixing)
+
+You can also access the dataset used for training the model here:<br>
+[Fine-tuned Llama 3.1 8B - Bug Fixing Dataset](https://huggingface.co/datasets/navidadkhah/bug_evaluation_dataset)
