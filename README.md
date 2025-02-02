@@ -43,22 +43,20 @@ Prompt engineering involves crafting and testing prompts that effectively guide 
   <thead>
     <tr>
       <th>
-          **Prompts**
+          Prompts
       </th>
       <th>
-          **Explanations**
+          Explanations
       </th>
     </tr>
   </thead>
   
   <tbody>
     <tr>
-      <td>
-            `
+      <td align="center">
            P1: Direct Instruction Prompts
-            `
       </td>
-      <td >
+      <td align="center">
             These prompts explicitly instruct the model to identify and fix errors in the code, using clear and direct language to guide the model's response.
       </td>
     </tr>
@@ -66,85 +64,74 @@ Prompt engineering involves crafting and testing prompts that effectively guide 
   
   <tbody>
     <tr>
-      <td>
-           ```
+      <td align="center">
            P2: Contextual Prompts
-           ```
       </td>
-      <td>
+      <td align="center">
            These prompts provide additional context about the purpose or functionality of the code, helping the model understand the intended behavior and identify discrepancies.
       </td>
     </tr>
 
   </tbody>
+  
   <tbody>
     <tr>
-      <td>
-```
-P3: Error Description Prompts
-```
+      <td align="center">
+           P3: Error Description Prompts
       </td>
-      <td>
-These involve describing a known error within the code and asking the model to correct it, which helps in scenarios where specific bug types are targeted.
+      <td align="center">
+           These involve describing a known error within the code and asking the model to correct it, which helps in scenarios where specific bug types are targeted.
       </td>
     </tr>
-
-
-  </thead>
+  </tbody>
+  
   <tbody>
     <tr>
-      <td>
-```
-P4: Comparative Prompts
-```
+      <td align="center">
+         P4: Comparative Prompts
       </td>
-      <td>
+      <td align="center">
 These prompts involve comparing the buggy code to a similar, but correct, code snippet to guide the model in understanding the corrections needed.
       </td>
     </tr>
-
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-```
-P5: Test Case Prompts
-```
-      </td>
-      <td>
-Involving test cases that the code must pass, these prompts help the model focus on producing a valid output that meets specified conditions, enhancing its debugging capabilities.
-      </td>
-    </tr>
-
-
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-```
-P6: Iterative Refinement Prompts
-```
-      </td>
-      <td>
-These prompts ask the model to iteratively refine the code based on feedback or errors identified in previous attempts, encouraging a more detailed focus on incremental improvements.
-      </td>
-    </tr>
-
   </tbody>
+  
+  <tbody>
+    <tr>
+      <td align="center">
+          P5: Test Case Prompts
+      </td>
+      <td align="center">
+          Involving test cases that the code must pass, these prompts help the model focus on producing a valid output that meets specified conditions, enhancing its debugging capabilities.
+      </td>
+    </tr>
+  </tbody>
+  
+  <tbody>
+    <tr>
+      <td align="center">
+          P6: Iterative Refinement Prompts
+      </td>
+      <td align="center">
+          These prompts ask the model to iteratively refine the code based on feedback or errors identified in previous attempts, encouraging a more detailed focus on incremental improvements.
+      </td>
+    </tr>
+  </tbody>
+  
 </table>
 
 ## Fine-Tuning
-Fine-tuning is conducted using the state-of-the-art LLM, detailed in the `Unsloth_Llama_3_1_8B.ipynb`. This process adjusts the model's weights based on our dataset to specialize its ability in the coding domain, focusing particularly on bug detection and resolution.
+In this project, fine-tuning is aimed at adapting the model to the coding domain, especially for bug detection and debugging. The model is trained on a dataset of code with errors and corresponding corrections, allowing it to learn patterns for identifying and fixing programming issues. The LoRA method is employed to efficiently adjust the model's weights, optimizing the fine-tuning process by reducing computational demand. This process enhances the model's ability to accurately detect and resolve bugs, ensuring it can provide effective code debugging suggestions while still generalizing well to other tasks. Fine-tuning, combined with LoRA, ensures that the model can handle the specific challenges of bug detection in programming with minimal resource requirements.
 
 **Fine-tuning processes and prompt engineering illustrations are shown in Figures 4, 9, 10, and 11.**
 
 
 ## Evaluation Metrics
 To assess the effectiveness of the model post-training, several metrics are employed:
-- **Exact Match**: Measures the percentage of instances where the model’s output matches the expected corrected code exactly.
+- **Exact Match**: Measures the percentage of instances where the model’s output exactly matches the expected corrected code.
 - **CodeBLEU**: Assesses code similarity considering syntax and semantic correctness.
-- **ROUGE**: Evaluates the overlap of n-grams between the model’s output and the target code.
-- **SAS**: A syntax-aware semantic evaluation metric focusing on logical correctness of the code.
+- **ROUGE**: Evaluate the overlap of n-grams between the model’s output and the target code.
+- **SAS**: A syntax-aware semantic evaluation metric focusing on the logical correctness of the code.
 
 **Results of these metrics are illustrated in Figures 30, 31, 32, and 33.**
 
